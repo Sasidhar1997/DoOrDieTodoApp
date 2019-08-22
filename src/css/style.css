@@ -1,0 +1,34 @@
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    user-select: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    user-select: none;
+}
+
+.input-group {
+    margin: auto;
+    width: 50% !important;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: blue;
+}
+
+.button {
+    color: brown;
+}
+
+.Moment {
+    /* text-align: right;
+    align-content: unset; */
+    padding-right: 70px;
+}

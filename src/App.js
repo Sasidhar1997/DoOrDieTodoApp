@@ -1,14 +1,17 @@
-import React from 'react';
-import Header from './Components/Header.js';
-import Footer from './Components/Footer.js';
+import React from "react";
+import "./css/style.css";
+import TodoBody from "./components/TodoBody.js";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-function App(){
- return(
-     <div>
-    <Header />
-     <Footer />
-     </div>
- )
-}
+const App = () => {
+    return (
+        <React.Fragment>
+            <Header />
+            <Footer />
+            <TodoBody />
+        </React.Fragment>
+    );
+};
 
-export default App ;
+export default App;
