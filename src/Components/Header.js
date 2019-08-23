@@ -8,12 +8,10 @@ class Header extends React.Component {
     };
     componentDidMount() {
         setInterval(() => {
-            console.log(this);
             this.setState({
                 currentTime: moment().format("DD MMM YYYY, h:mm:ss A")
             });
         }, 1000);
-        console.log("currentTime");
     }
     render() {
         return (
