@@ -3,7 +3,7 @@ import React from "react";
 class TodoForm extends React.Component {
     render() {
         return (
-            <form>
+            <form id="todoForm" onSubmit={this.props.addTodoItem}>
                 <div className="input-group">
                     <input
                         name="Tasks"
@@ -19,6 +19,9 @@ class TodoForm extends React.Component {
                             className="btn btn-outline-secondary"
                             type="submit"
                             id="button-addon2"
+                            // onClick={() => {
+                            //     window.alert("Task Added");
+                            // }}
                         >
                             Add Task
                         </button>

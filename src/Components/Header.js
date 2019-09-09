@@ -26,10 +26,7 @@ class Header extends React.Component {
                     />
                     &nbsp; DoOrDie
                 </span>
-                <span style={{ color: "white" }}>
-                    {this.state.currentTime}
-                    {/* {moment().format("DD MMM YYYY, h:mm:ss A")} */}
-                </span>
+                <span style={{ color: "white" }}>{this.state.currentTime}</span>
             </nav>
         );
     }
