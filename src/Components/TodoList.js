@@ -1,10 +1,15 @@
 import React from "react";
+import TodoItem from "./TodoItem.js";
 
 class TodoList extends React.Component {
     render() {
-        var todoListData = this.props.todoListData;
-        console.log(todoListData);
-        return <h1>Hi!</h1>;
+        return (
+            <React.Fragment>
+                {this.props.todoListData.map(item => (
+                    <TodoItem key={item.id} {...item} />
+                ))}
+            </React.Fragment>
+        );
     }
 }
 

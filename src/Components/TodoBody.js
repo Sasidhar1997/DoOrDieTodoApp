@@ -8,32 +8,27 @@ class TodoBody extends React.Component {
         todoListData: []
     };
 
-    addTodoItem = event => {
-        event.preventDefault();
-        let value = event.target.Tasks.value;
-        console.log(value);
-        if (value) {
+    addTodoItem = (todoText, deadLine) => {
+        try {
             var copyList = this.state.todoListData.slice();
             copyList.push({
                 id: uuid(),
-                todo: value,
+                todo: todoText,
                 createdAt: new Date().toISOString(),
                 isCompleted: false,
-                completedAt: null
+                completedAt: null,
+                deadLine
             });
-
             this.setState({
                 todoListData: copyList
             });
-            alert("Task Added");
-        } else {
-            alert("enter the correct value !!");
+            return true;
+        } catch (error) {
+            return false;
         }
-        document.getElementById("todoForm").reset();
     };
 
     render() {
-        console.log(this.state);
         return (
             <React.Fragment>
                 <TodoForm addTodoItem={this.addTodoItem} />

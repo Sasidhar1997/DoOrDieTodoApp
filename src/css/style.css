@@ -27,8 +27,30 @@
     color: brown;
 }
 
-.Moment {
-    /* text-align: right;
-    align-content: unset; */
-    padding-right: 70px;
+.todoForm {
+    margin: auto;
+    width: 50% !important;
+}
+
+.todo-item-body {
+    display: flex;
+    align-items: center;
+}
+
+.todo-item-body > div {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.todo-content {
+    flex: 1;
+}
+
+.deadline > span,
+.todo-content > span {
+    font-size: 12px;
+}
+
+.flexible {
+    flex: 2;
 }
