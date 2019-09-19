@@ -4,8 +4,8 @@ import moment from "moment";
 class TodoItem extends React.Component {
     render() {
         return (
-            <div class="card">
-                <div class="card-body flexible">
+            <div class="card flexible">
+                <div class="card-body">
                     <div class="custom-control custom-checkbox">
                         <input
                             type="checkbox"

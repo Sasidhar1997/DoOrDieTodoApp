@@ -23,12 +23,6 @@ class TodoForm extends React.Component {
         });
     };
 
-    // handleChange = onChange => {
-    //     this.setState({
-    //         startDate: onChange
-    //     });
-    // };
-
     handleSubmit = e => {
         e.preventDefault();
         if (this.state.todoInput) {

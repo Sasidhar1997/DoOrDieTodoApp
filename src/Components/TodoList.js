@@ -1,16 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import TodoItem from "./TodoItem.js";
 
-class TodoList extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                {this.props.todoListData.map(item => (
-                    <TodoItem key={item.id} {...item} />
-                ))}
-            </React.Fragment>
-        );
-    }
-}
+const TodoList = props => {
+    console.log(props);
+    return props.list.map(item => <TodoItem key={item.id} {...item} />);
+};
 
-export default TodoList;
+const mapStateToProps = state => {
+    return {
+        list: state.todo.list,
+        count: state.todo.count
+    };
+};
+
+export default connect(mapStateToProps)(TodoList);
