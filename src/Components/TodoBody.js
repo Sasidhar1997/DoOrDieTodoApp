@@ -3,10 +3,6 @@ import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
 
 class TodoBody extends React.Component {
-    state = {
-        todoListData: []
-    };
-
     render() {
         return (
             <React.Fragment>

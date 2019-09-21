@@ -1,5 +1,8 @@
 import React from "react";
 import DatePicker from "react-datepicker";
+import { connect } from "react-redux";
+
+import { addTodoItemAction } from "../redux/actions/action-todo";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -29,7 +32,7 @@ class TodoForm extends React.Component {
             if (this.state.deadLine) {
                 let todoInput = this.state.todoInput;
                 let deadLine = this.state.deadLine.toISOString();
-                let isSuccess = this.props.addTodoItem(todoInput, deadLine);
+                let isSuccess = this.props.addTodo(todoInput, deadLine);
                 if (isSuccess) {
                     this.setState({
                         todoInput: "",
@@ -82,4 +85,12 @@ class TodoForm extends React.Component {
     }
 }
 
-export default TodoForm;
+const mapDispatchToProps = dispatch => ({
+    addTodo: (todoInput, deadLine) =>
+        dispatch(addTodoItemAction(todoInput, deadLine))
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(TodoForm);
