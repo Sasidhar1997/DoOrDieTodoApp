@@ -1,28 +1,41 @@
-import React from "react";
+//
+import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 
-import { addTodoItemAction } from "../redux/actions/action-todo";
+import {
+    addTodoItemAction,
+    editTodoAction
+} from "../redux/actions/action-todo";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-class TodoForm extends React.Component {
+class TodoForm extends Component {
     state = {
-        todoInput: "",
-        deadLine: ""
+        deadLine: "",
+        todoInput: ""
     };
 
-    todoTextChange = event => {
-        if (event.target.value.length <= 100) {
+    componentDidMount() {
+        if (this.props.id) {
             this.setState({
-                todoInput: event.target.value
+                todoInput: this.props.todoInput,
+                deadLine: new Date(this.props.deadLine)
+            });
+        }
+    }
+
+    todoInputChange = e => {
+        if (e.target.value.length <= 100) {
+            this.setState({
+                todoInput: e.target.value
             });
         }
     };
 
-    todoDateChange = eve => {
+    handleDateChange = date => {
         this.setState({
-            deadLine: eve
+            deadLine: date
         });
     };
 
@@ -32,12 +45,16 @@ class TodoForm extends React.Component {
             if (this.state.deadLine) {
                 let todoInput = this.state.todoInput;
                 let deadLine = this.state.deadLine.toISOString();
-                let isSuccess = this.props.addTodo(todoInput, deadLine);
-                if (isSuccess) {
-                    this.setState({
-                        todoInput: "",
-                        deadLine: ""
-                    });
+                if (this.props.id) {
+                    this.props.editTodo(this.props.id, todoInput, deadLine);
+                } else {
+                    let isSuccess = this.props.addTodo(todoInput, deadLine);
+                    if (isSuccess) {
+                        this.setState({
+                            todoInput: "",
+                            deadLine: ""
+                        });
+                    }
                 }
             } else {
                 alert("Please select deadline");
@@ -49,45 +66,71 @@ class TodoForm extends React.Component {
 
     render() {
         return (
-            <form id="todoForm" onSubmit={this.handleSubmit} autoComplete="off">
-                <div className="input-group">
-                    <input
-                        name="Tasks"
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Tasks"
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                        value={this.state.todoText}
-                        onChange={this.todoTextChange}
-                    />
-                    <DatePicker
-                        selected={this.state.deadLine}
-                        onChange={this.todoDateChange}
-                        className="form-control"
-                        placeholderText="Select Date"
-                        dateFormat="MMM d, yyyy"
-                        name="deadLine"
-                    />
-                    <div className="button">
-                        <button
-                            style={{ backgroundColor: "red", color: "white" }}
-                            className="btn btn-outline-secondary"
-                            type="submit"
-                            id="button-addon2"
-                        >
-                            Add Task
-                        </button>
-                    </div>
+            <div className="row align-items-center w-100">
+                <div className="col-12" style={{ textAlign: "center" }}>
+                    <form
+                        id="todoForm"
+                        onSubmit={this.handleSubmit}
+                        autoComplete="off"
+                    >
+                        <div className="form-row">
+                            <div className="col-12 col-md-8">
+                                <input
+                                    type="text"
+                                    name="todoInput"
+                                    className="form-control"
+                                    placeholder="Enter Tasks"
+                                    value={this.state.todoInput}
+                                    onChange={this.todoInputChange}
+                                />
+                            </div>
+                            <div className="col-12 col-md-3">
+                                <DatePicker
+                                    selected={this.state.deadLine}
+                                    onChange={this.handleDateChange}
+                                    todayButton="Today"
+                                    minDate={new Date()}
+                                    showTimeSelect
+                                    className="form-control"
+                                    placeholderText="Select deadline"
+                                    dateFormat="MMM dd, yyyy h:mm aa"
+                                    name="deadLine"
+                                />
+                            </div>
+                            <div className="col">
+                                <button
+                                    className="btn btn-outline-success"
+                                    type="submit"
+                                >
+                                    {this.props.id ? (
+                                        <i className="fa fa-save" />
+                                    ) : (
+                                        "Add"
+                                    )}
+                                </button>
+                                {this.props.id ? (
+                                    <button
+                                        onClick={this.props.cancelEdit}
+                                        className="btn btn-outline-danger ml-2"
+                                        type="button"
+                                    >
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                ) : null}
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     addTodo: (todoInput, deadLine) =>
-        dispatch(addTodoItemAction(todoInput, deadLine))
+        dispatch(addTodoItemAction(todoInput, deadLine)),
+    editTodo: (id, todoInput, deadLine) =>
+        dispatch(editTodoAction(id, todoInput, deadLine))
 });
 
 export default connect(

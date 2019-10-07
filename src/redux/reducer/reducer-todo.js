@@ -5,12 +5,37 @@ const defaultState = {
 
 const todoReducer = (state = defaultState, actions) => {
     switch (actions.type) {
-        case "ADD_TODO_ITEM":
-            let listCopy = state.list.slice();
-            listCopy.push(actions.payload);
+        // case "ADD_TODO_ITEM":
+        //     return {
+        //         ...state,
+        //         list: actions.payload
+        //     };
+        // case "DELETE_TODO_ITEM":
+        //     return {
+        //         ...state,
+        //         list: actions.payload
+        //     };
+        // case "TODO_COMPLETED":
+        //     return {
+        //         ...state,
+        //         list: actions.payload
+        //     };
+        // case "TODO_EDITED":
+        //     return {
+        //         ...state,
+        //         list: actions.payload
+        //     };
+        case "LOAD_DATA_START":
             return {
                 ...state,
-                list: listCopy
+                loading: true,
+                list: []
+            };
+        case "LOAD_DATA_SUCCESS":
+            return {
+                ...state,
+                list: actions.payload,
+                loading: false
             };
         default:
             return state;

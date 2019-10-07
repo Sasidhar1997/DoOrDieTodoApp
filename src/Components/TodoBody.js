@@ -1,12 +1,13 @@
 import React from "react";
-import TodoForm from "./TodoForm.js";
-import TodoList from "./TodoList.js";
+// import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
 
 class TodoBody extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <TodoForm />
+                {/* <TodoForm /> */}
+                {/* <hr /> */}
                 <TodoList />
             </React.Fragment>
         );
